@@ -1,0 +1,64 @@
+<html>
+<font face = "Arial">
+    <head>
+        <title> Reports Diff </title>
+    </head>
+    <h3> Validation Reports Differences </h3>
+    <p> Your dates: <%= date1 %> & <%= date2 %></p>
+
+
+    <table border = '3'>
+        <thead>
+            <tr>
+                <th> </th>
+                <%
+
+                function formatDifference1(val) {
+                    if (!val){
+                    return ' ';
+                    }
+
+                // JSON.stringify(val, null, 1) || '';
+                var old = val["__old"];
+    return old;
+}
+
+function formDiff2(val) {
+    if (!val){
+        return ' ';
+    }
+    var newVals = val["__new"];
+    return newVals;
+}
+
+
+for( var j = 0; j < fields.length; j++) { %>
+
+            <th><%= fields[j] %></th>
+<% } %>
+        </tr>
+    </thead>
+<%
+    var keys = Object.keys(json);
+    for( var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        var value = json[key];
+        var output = (JSON.stringify(value, null, 1));
+%>
+    <tr>
+        <th><%= key %></th>
+<%
+    for( var f = 0; f < fields.length; f++) {
+%>
+
+    <% var oldValues = formatDifference1(value[fields[f]]) %>
+    <% var newValues = formDiff2(value[fields[f]]) %>
+    <td><del><font color="#B00000"><%= oldValues%></font></del>    <%= newValues %></td>
+
+<% } %>
+    </tr>
+<% } %>
+    </table>
+
+</font>
+</html>
